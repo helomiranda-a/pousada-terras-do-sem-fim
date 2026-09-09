@@ -77,21 +77,30 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Hotel Pousada Terras do Sem Fim | Ilhéus - Bahia" },
+      {
+        name: "description",
+        content:
+          "Hospede-se no Hotel Pousada Terras do Sem Fim, em Ilhéus, Bahia. Conforto, natureza, piscinas e tranquilidade entre a Mata Atlântica e o mar.",
+      },
+      { name: "author", content: "Hotel Pousada Terras do Sem Fim" },
+      { name: "theme-color", content: "#1b3329" },
+      { property: "og:site_name", content: "Hotel Pousada Terras do Sem Fim" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", type: "image/png", href: "/favicon.png" },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap",
+      },
     ],
   }),
   shellComponent: RootShell,
