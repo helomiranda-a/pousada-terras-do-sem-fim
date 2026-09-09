@@ -1,24 +1,95 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+import { Header } from "@/components/site/Header";
+import { Hero } from "@/components/site/Hero";
+import { Intro } from "@/components/site/Intro";
+import { APousada } from "@/components/site/APousada";
+import { Acomodacoes } from "@/components/site/Acomodacoes";
+import { Estrutura } from "@/components/site/Estrutura";
+import { Experiencias } from "@/components/site/Experiencias";
+import { Ilheus } from "@/components/site/Ilheus";
+import { Galeria } from "@/components/site/Galeria";
+import { Avaliacoes } from "@/components/site/Avaliacoes";
+import { Localizacao } from "@/components/site/Localizacao";
+import { CtaFinal } from "@/components/site/CtaFinal";
+import { Footer } from "@/components/site/Footer";
+import { FloatingCta } from "@/components/site/FloatingCta";
+import { site } from "@/lib/site";
+
+const title = "Hotel Pousada Terras do Sem Fim | Ilhéus - Bahia";
+const description =
+  "Hospede-se no Hotel Pousada Terras do Sem Fim, em Ilhéus, Bahia. Conforto, natureza, piscinas e tranquilidade entre a Mata Atlântica e o mar.";
+
 export const Route = createFileRoute("/")({
   component: Index,
+  head: () => ({
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "/" },
+      { property: "og:locale", content: "pt_BR" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: title },
+      { name: "twitter:description", content: description },
+    ],
+    links: [{ rel: "canonical", href: "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Hotel",
+          name: site.name,
+          legalName: site.legalName,
+          email: site.email,
+          telephone: site.phones,
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: `${site.address.line1}, ${site.address.line2}`,
+            addressLocality: "Ilhéus",
+            addressRegion: "BA",
+            postalCode: site.address.cep,
+            addressCountry: "BR",
+          },
+          amenityFeature: [
+            "Piscina adulta",
+            "Piscina infantil",
+            "Playground",
+            "Estacionamento",
+            "Bar",
+            "Restaurante",
+            "Café da manhã",
+            "Wi-Fi gratuito",
+            "Recepção 24 horas",
+          ].map((name) => ({ "@type": "LocationFeatureSpecification", name })),
+        }),
+      },
+    ],
+  }),
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen bg-background">
+      <Header />
+      <main>
+        <Hero />
+        <Intro />
+        <APousada />
+        <Acomodacoes />
+        <Estrutura />
+        <Experiencias />
+        <Ilheus />
+        <Galeria />
+        <Avaliacoes />
+        <Localizacao />
+        <CtaFinal />
+      </main>
+      <Footer />
+      <FloatingCta />
     </div>
   );
 }
